@@ -1,0 +1,103 @@
+<style>
+body {
+    background: -webkit-linear-gradient(135deg, rgb(62, 59, 155), rgb(118, 42, 112));
+    background: -o-linear-gradient(135deg, rgb(62, 59, 155), rgb(118, 42, 112));
+    background: linear-gradient(135deg, rgb(62, 59, 155), rgb(118, 42, 112));
+    /* min-height: 100vh; to provide the gradient to the whole screen */
+    min-height: 100vh;
+    /* margin: 0; is added so that page won't show scrollbar when the content is less */
+    margin: 0;
+    color: white;
+    font-family: 'ubuntu';
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+  width: 50%;
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  transition-duration: .5s;
+}
+
+input::placeholder {
+  font-size: 1em;
+  color: white;
+}
+
+input:focus {
+  border-color: black;
+  outline: none;
+  color: black;
+  background: white;
+}
+</style>
+
+<script type="text/javascript">
+  var codesEl;
+var jsonData = [
+  {
+    "name": "amazon",
+    "code": "aksdhfkjags"
+  },
+  {
+    "name": "aMaZoN",
+    "code": "qiweuryqew"
+  },
+  {
+    "name": "flipkart",
+    "code": "kjqwherklq"
+  },
+  {
+    "name": "flipkart",
+    "code": "qmbewnqbwe"
+  },
+  {
+    "name": "flipkart",
+    "code": "zzvzxcvvnmz"
+  },
+  {
+    "name": "ebay",
+    "code": "tyjutynf"
+  },
+  {
+    "name": "ebay",
+    "code": "asgcmngjhjser"
+  }
+];
+
+function printData(Arr) {
+        for(var i=0; i<3; i++) 
+          {
+          codesEl.innerText += `\n${Arr[i].name} code: ${Arr[i].code}`;
+          }
+}
+
+// it is a case insensitive search
+function search(ev) {
+  var key = ev.target.value;
+  codesEl.innerText = null;
+  if(key.length>0)
+  {
+    console.log(key.length);
+    printData(jsonData.filter((data)=>{
+      var regex = new RegExp(key, "i");
+      return data.name.match(regex) || data.code.match(regex);
+      }));
+  }
+}
+
+window.onload = function() {
+  codesEl = document.getElementById("codes");
+}
+</script>
+
+<input type="text" onkeyup="search(event)" placeholder="Enter Search Key Here" />
+<div>
+  <span id="codes"></span>
+</div>
+
